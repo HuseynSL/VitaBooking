@@ -12,7 +12,6 @@ import { deleteHotel,
 
 // POST
 router.post("/", postHotel)
-
 // UPDATE
 router.put("/:id",updateHotel)
 // DELETE

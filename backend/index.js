@@ -6,9 +6,10 @@ import authRoute from "./routers/auth.js";
 import usersRoute from "./routers/users.js";
 import hotelsRoute from "./routers/hotels.js";
 import roomsRoute from "./routers/rooms.js";
-
+import cookieParser from "cookie-parser";
 
 const app=express()
+app.use(cookieParser())
 app.use(json())
 app.use(cors())
 dotenv.config()
@@ -29,9 +30,12 @@ const connect = async () => {
   app.use("/api/rooms",roomsRoute);
 
   app.use((err, req, res, next) => {
-    const errorStatus = err.status || 500;
-    const errorMessage = err.message || "Something went wrong!";
-  });
+    console.error(err.stack);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Internal Server Error",
+    });
+});
 
 app.listen(3001,()=>{
     connect()
