@@ -8,14 +8,15 @@ import { deleteHotel,
         postHotel,
         updateHotel 
 } from "../controllers/hotelControllers.js"
+import { verifyAdmin } from "../utils/verifyToken.js"
 
 
 // POST
-router.post("/", postHotel)
+router.post("/",verifyAdmin, postHotel)
 // UPDATE
-router.put("/:id",updateHotel)
+router.put("/:id",verifyAdmin,updateHotel)
 // DELETE
-router.delete("/:id",deleteHotel)
+router.delete("/:id",verifyAdmin,deleteHotel)
 // GETByID
 router.get("/:id",getByIdHotel)
 // GETALL

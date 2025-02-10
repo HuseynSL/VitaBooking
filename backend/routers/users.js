@@ -1,9 +1,5 @@
 import express from "express"
-import { deleteuser,
-         getByIduser,
-         getuser,
-         updateuser 
-            } from "../controllers/userControllers.js"
+import { deleteuser,getByIduser,getuser,updateuser } from "../controllers/userControllers.js"
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js"
 const router = express.Router()
 
@@ -21,13 +17,13 @@ router.get("/checkadmin/:id",verifyAdmin, (req, res, next) => {
     res.send( "ADMIN, You are logged in and you can delete all account" );
 });
 // UPDATE
-router.put("/:id",updateuser)
+router.put("/:id",verifyUser,updateuser)
 // DELETE
-router.delete("/:id",deleteuser)
+router.delete("/:id",verifyUser,deleteuser)
 // GETByID
-router.get("/:id",getByIduser)
+router.get("/:id",verifyUser,getByIduser)
 // GETALL
-router.get("/", getuser)  
+router.get("/",verifyAdmin, getuser)  
 
 
 
