@@ -47,7 +47,7 @@ const Header = () => {
   
   return (
     <>
-      <div className="header w-full bg-yellow-500">
+      <div className="header w-full bg-[#1C0F5E]">
         <div className={style.container}>
           <div className="headerList flex gap-5 text-white text-">
             <div className="headerListItem flex gap-2 border-2 rounded-full p-2 text-md">

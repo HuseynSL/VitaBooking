@@ -4,6 +4,8 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchHotels from "../SearchHotels/SearchHotels";
+import url from "../../utils/baseUrl.js"
+import useFetch from "../../hooks/useFetch.js"
 
 const ListSlider = () => {
   const location = useLocation();
@@ -11,6 +13,14 @@ const ListSlider = () => {
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+
+  const { data, loading, error,reFetch}=useFetch(`${url}/hotels?city=${destination}&min=${min || 0}&max=${max || 9999}`)
+
+  const handleClick=()=>{
+    reFetch()
+  }
   return (
     <>
       <div className="listSearch text-white flex-1 bg-blue-600 p-2 border-8 sticky top-[10px] h-max">
@@ -53,7 +63,8 @@ const ListSlider = () => {
               <input
                 type="number"
                 className="lsOptionInput h-8 p-1 text-black w-12"
-                placeholder="49"
+                onChange={e=>setMin(e.target.value)}
+                // placeholder="49"
               />
             </div>
 
@@ -64,7 +75,8 @@ const ListSlider = () => {
               <input
                 type="number"
                 className="lsOptionInput h-8 p-1 text-black w-12"
-                placeholder="9999"
+                onChange={e=>setMax(e.target.value)}
+                // placeholder="9999"
               />
             </div>
 
@@ -100,17 +112,17 @@ const ListSlider = () => {
           </div>
         </div>
 
-        <button className="p-2 bg-yellow-500 text-white w-full font-md cursor-pointer">
+        <button className="p-2 bg-yellow-500 text-white w-full font-md cursor-pointer"
+        onClick={handleClick}>
           Search
         </button>
       </div>
       <div className="listResult flex-3">
-        <SearchHotels />
-        <SearchHotels />
-        <SearchHotels />
-        <SearchHotels />
-        <SearchHotels />
-        <SearchHotels />
+        {loading ? "loading.." :<>
+        {data.map(item=>(
+          <SearchHotels item={item} key={item._id} />
+        ))}
+        </>}
       </div>
     </>
   );

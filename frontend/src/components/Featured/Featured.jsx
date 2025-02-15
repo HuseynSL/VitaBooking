@@ -1,9 +1,16 @@
 import React from 'react'
-
+import url from "../../utils/baseUrl.js"
+import useFetch from "../../hooks/useFetch.js"
 const Featured = () => {
+  // deyisiklik edilecek
+  const { data, loading, error}=useFetch(`${url}/hotels/countByCity?cities=Baku,Siyezen,Sumqayit`)
+  
     return (
         <div className="featured w-full max-w-6xl flex justify-between gap-5 z-10">
-          <div className="featuredItem relative text-white border-8 overflow-hidden	h-60 flex-1">
+         {loading ?  (
+        "Loading please wait"
+      ) : (
+         <><div className="featuredItem relative text-white border-8 overflow-hidden	h-60 flex-1">
             <img
               src="https://ychef.files.bbci.co.uk/960x540/p09vhml6.jpeg"
               alt=""
@@ -11,7 +18,7 @@ const Featured = () => {
             />
             <div className="featuredTitles absolute bottom-[20px] left-[20px]">
               <h1>Baku</h1>
-              <h2>77 properties</h2>
+              <h2>{data[0]} properties</h2>
             </div>
           </div>
           
@@ -23,7 +30,7 @@ const Featured = () => {
             />
             <div className="featuredTitles absolute bottom-[20px] left-[20px]">
               <h1>Qax</h1>
-              <h2>43 properties</h2>
+              <h2>{data[1]} properties</h2>
             </div>
           </div>
 
@@ -35,9 +42,10 @@ const Featured = () => {
             />
             <div className="featuredTitles absolute bottom-[20px] left-[20px]">
               <h1>Sheki</h1>
-              <h2>35 properties</h2>
+              <h2>{data[2]} properties</h2>
             </div>
           </div>
+          </>)}
         </div>
       );
 }
