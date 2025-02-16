@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./style.module.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -13,8 +13,11 @@ import { IoIosBed } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -30,7 +33,8 @@ const Header = () => {
     children: 0,
     room: 1,
   });
-  const navigate = useNavigate();
+
+  const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -41,7 +45,10 @@ const Header = () => {
     });
   };
 
+  const {dispatch}=useContext(SearchContext)
+
   const handleSearch = () => {
+    dispatch({type:"NEW_SEARCH", payload:{destination,date,options}});
     navigate("/hotels", { state: { destination, date, options } });
   };
   
