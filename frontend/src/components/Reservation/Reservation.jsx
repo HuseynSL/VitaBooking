@@ -1,77 +1,102 @@
-import React from 'react'
+import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ImCancelCircle } from "react-icons/im";
-import url from "../../utils/baseUrl.js"
+import url from "../../utils/baseUrl.js";
 
+const Reservation = ({ setOpen, hotelId }) => {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user ? user._id : "";
+  const [selectedRooms, setSelectedRooms] = useState([]);
+  const { data, loading, error } = useFetch(`${url}/hotels/room/${hotelId}`);
+  const { date: dates } = useContext(SearchContext);
 
-const Reservation = ({setOpen,hotelId}) => {
+  const getDatesInRange = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-    const [selectedRooms, setSelectedRooms] = useState([]);
-    const { data, loading, error } = useFetch(`${url}/hotels/room/${hotelId}`);
-    const { date:dates } = useContext(SearchContext);
+    const date = new Date(start.getTime());
+
+    const dates = [];
+
+    while (date <= end) {
+      dates.push(new Date(date).getTime());
+      date.setDate(date.getDate() + 1);
+    }
+
+    return dates;
+  };
+
+  const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+
+  const isAvailable = (roomNumber) => {
+    const isFound = roomNumber.unavailableDates.some((date) =>
+      alldates.includes(new Date(date).getTime())
+    );
+
+    return !isFound;
+  };
+
+  const handleSelect = (e) => {
+    const checked = e.target.checked;
+    const value = e.target.value;
+
+    setSelectedRooms(
+      checked
+        ? [...selectedRooms, value]
+        : selectedRooms.filter((item) => item !== value)
+    );
+  };
+
+  const handleClick = async () => {
+    try {
+      const reservations = await Promise.all(
+        selectedRooms.map(async (roomId) => {
+          const roomData = data
+            .flatMap((item) => item.roomNumbers)
+            .find((room) => room._id === roomId);
   
-    const getDatesInRange = (startDate, endDate) => {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+          if (!roomData) {
+            console.error(`Room not found for ID: ${roomId}`);
+            return null; 
+          }
   
-      const date = new Date(start.getTime());
+          const roomNumber = roomData.number;
   
-      const dates = [];
+          const res = await axios.post(`${url}/reservations`, {
+            userId: userId, 
+            hotelId: hotelId,
+            roomId: roomId,
+            roomNumber: roomNumber,
+            startDate: alldates[0],
+            endDate: alldates[alldates.length - 1],
+          });
   
-      while (date <= end) {
-        dates.push(new Date(date).getTime());
-        date.setDate(date.getDate() + 1);
-      }
-  
-      return dates;
-    };
-  
-    const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
-  
-    const isAvailable = (roomNumber) => {
-      const isFound = roomNumber.unavailableDates.some((date) =>
-        alldates.includes(new Date(date).getTime())
+          return res.data;
+        })
       );
   
-      return !isFound;
-    };
+     
+      const successfulReservations = reservations.filter((res) => res !== null);
   
-    const handleSelect = (e) => {
-      const checked = e.target.checked;
-      const value = e.target.value;
-      setSelectedRooms(
-        checked
-          ? [...selectedRooms, value]
-          : selectedRooms.filter((item) => item !== value)
-      );
-    };
-  
-    const navigate = useNavigate();
-  
-    const handleClick = async () => {
-      try {
-        await Promise.all(
-          selectedRooms.map((roomId) => {
-            const res = axios.put(`/rooms/availability/${roomId}`, {
-              dates: alldates,
-            });
-            return res.data;
-          })
-        );
+      if (successfulReservations.length > 0) {
         setOpen(false);
         navigate("/");
-      } catch (err) {}
-    };
-
-
+      } else {
+        console.error("No reservations were successfully made.");
+      }
+    } catch (err) {
+      console.error("Error making reservation:", err);
+    }
+  };
   return (
     <div className="reserve w-full h-full fixed top-[0px] left-[0px] flex items-center justify-center">
       <div className="rContainer bg-white p-5 relative">
-        <ImCancelCircle 
+        <ImCancelCircle
           className="rClose absolute top-0 right-0 cursor-pointer"
           onClick={() => setOpen(false)}
         />
@@ -88,7 +113,7 @@ const Reservation = ({setOpen,hotelId}) => {
             </div>
             <div className="rSelectRooms flex flex-wrap gap-1 text-xs text-gray">
               {item.roomNumbers.map((roomNumber) => (
-                <div className="room flex flex-col">
+                <div className="room flex flex-col" key={roomNumber._id}>
                   <label>{roomNumber.number}</label>
                   <input
                     type="checkbox"
@@ -106,7 +131,7 @@ const Reservation = ({setOpen,hotelId}) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Reservation
+export default Reservation;

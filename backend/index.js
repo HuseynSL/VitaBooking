@@ -6,6 +6,7 @@ import authRoute from "./routers/auth.js";
 import usersRoute from "./routers/users.js";
 import hotelsRoute from "./routers/hotels.js";
 import roomsRoute from "./routers/rooms.js";
+import reservationRoute from "./routers/reservations.js";
 import cookieParser from "cookie-parser";
 
 const app=express()
@@ -28,6 +29,7 @@ const connect = async () => {
   app.use("/api/users",usersRoute);
   app.use("/api/hotels",hotelsRoute);
   app.use("/api/rooms",roomsRoute);
+  app.use("/api/reservations", reservationRoute);
 
   app.use((err, req, res, next) => {
     console.error(err.stack);

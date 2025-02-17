@@ -41,8 +41,8 @@ const Login = () => {
         className={`${styles.container} ${isSignUp ? styles.rightPanelActive : ""}`}
         id="container"
       >
-        {/* Kayıt Ol
-        <div className={`${styles.formContainer} ${styles.signUpContainer}`}>
+        
+        {/* <div className={`${styles.formContainer} ${styles.signUpContainer}`}>
           <form>
             <h1>Create Account</h1>
             <div className={styles.socialContainer}>
@@ -64,7 +64,7 @@ const Login = () => {
           </form>
         </div> */}
 
-        {/* Giriş Yap */}
+        
         <div className={`${styles.formContainer} ${styles.signInContainer}`}>
           <form>
             <h1>Sign in</h1>
@@ -88,7 +88,7 @@ const Login = () => {
           </form>
         </div>
 
-        {/* Arka Plan */}
+        
         <div className={styles.overlayContainer}>
           <div className={styles.overlay}>
             <div className={`${styles.overlayPanel} ${styles.overlayLeft}`}>
