@@ -11,7 +11,22 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    // country: {
+    password: {
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("User", UserSchema);
+
+
+// country: {
     //   type: String,
     //   required: true,
     // },
@@ -26,16 +41,3 @@ const UserSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
-    password: {
-      type: String,
-      required: true,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true }
-);
-
-export default mongoose.model("User", UserSchema);

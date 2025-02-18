@@ -45,176 +45,141 @@ const Header = () => {
     });
   };
 
-  const {dispatch}=useContext(SearchContext)
+  const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
-    dispatch({type:"NEW_SEARCH", payload:{destination,date,options}});
+    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
     navigate("/hotels", { state: { destination, date, options } });
   };
-  
+
   return (
     <>
       <div className="header w-full bg-[#1C0F5E]">
         <div className={style.container}>
-          <div className="headerList flex gap-5 text-white text-">
-            <div className="headerListItem flex gap-2 border-2 rounded-full p-2 text-md">
+          <div className="headerList flex justify-center gap-5 text-white md:justify-start">
+            <div className="headerListItem flex gap-1 border-2 rounded-full p-1 text-md md:gap-2 p-2">
               <span className="pt-1">
                 <IoBed />
               </span>
               <span>Stays</span>
             </div>
-            <div className="headerListItem flex gap-2 p-2 text-md">
+            <div className="headerListItem flex gap-2 py-2 text-md">
               <span className="pt-1">
                 <MdFlightTakeoff />
               </span>
               <span>Flight</span>
             </div>
-            <div className="headerListItem flex gap-2 p-2 text-md">
+            <div className="headerListItem flex gap-2 py-2 text-md">
               <span className="pt-1">
                 <FaCar />
               </span>
               <span>Car</span>
             </div>
-            <div className="headerListItem flex gap-2 p-2 text-md">
+            <div className="headerListItem flex gap-2 py-2 text-md">
               <span className="pt-1">
                 <MdAttractions />
               </span>
               <span>Attractions</span>
             </div>
-            <div className="headerListItem flex gap-2 p-2 text-md">
+            {/* <div className="headerListItem flex gap-2 py-2 text-md">
               <span className="pt-1">
                 <BsFillTaxiFrontFill />
               </span>
               <span>Airport Taxis</span>
-            </div>
+            </div> */}
           </div>
 
-          <div className="headerContent flex  flex-col gap-5 text-white py-16">
-            <h1 className="font-bold text-5xl">Find your next stay</h1>
-            <p className="text-2xl">
+          <div className="headerContent flex py-8 flex-col gap-5 text-white md:py-16">
+            <h1 className="font-bold text-3xl md:text-5xl">
+              Find your next stay
+            </h1>
+            <p className="text-lg md:text-2xl">
               Search low prices on hotels, homes and much more...
             </p>
           </div>
 
-          <div className="headerSearch w-full flex justify-around py-10 rounded-xl absolute h-8 bg-white border-2 border-blue-500  bottom-[-30px] pt-8">
-            {/* search*/}
-            <div className="headerSearchItem flex items-center gap-5">
-              <span className="headerIcon">
-                <IoIosBed />
-              </span>
+          <div className="headerSearch w-full  grid grid-cols-1 py-1 gap-0 md:grid-cols-4 gap-4 py-6 px-4 rounded-xl absolute bg-white border-2 border-blue-500 bottom-[-30px] shadow-lg">
+            {/* Search */}
+            <div className="headerSearchItem flex items-center gap-3 w-full border-2 border-yellow-500 px-2 rounded-md bg-gray-100 md:px-3 py-2">
+              <IoIosBed className="text-blue-500 text-xl" />
               <input
                 type="text"
                 placeholder="Where are you going?"
-                className="headerSearchInput border-0 outline-0"
+                className="w-full bg-transparent border-none outline-none text-gray-700 placeholder-gray-500"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
             </div>
-            {/* date */}
-            <div className="headerSearchItem flex items-center gap-5">
-              <span className="headerIcon">
-                <FaCalendarAlt />
-              </span>
+
+            {/* Datesss */}
+            <div className="headerSearchItem relative flex items-center gap-3 w-full border-2 border-yellow-500 px-3 py-2 rounded-md bg-gray-100 cursor-pointer">
+              <FaCalendarAlt className="text-blue-500 text-xl" />
               <span
                 onClick={() => setOpenDate(!openDate)}
-                className="headerSearchText text-gray-500 cursor-pointer"
-              >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-                date[0].endDate,
-                "MM/dd/yyyy"
-              )}`}</span>
-              {openDate && (
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={(item) => setDate([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  className="date absolute top-[50px] z-20"
-                  minDate={new Date()}
-                />
-              )}
-            </div>
-            {/* people */}
-            <div className="headerSearchItem flex items-center gap-5">
-              <span className="headerIcon">
-                <IoPersonOutline />
+                className="text-gray-600"
+              >
+                {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                  date[0].endDate,
+                  "MM/dd/yyyy"
+                )}`}
               </span>
-              <span
-                onClick={() => setOpenOptions(!openOptions)}
-                className="headerSearchText text-gray-500 cursor-pointer"
-              >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
-              {openOptions && (
-                <div className="options z-20 absolute top-[50px] bg-white text-gray border-4 shadow-[0px_0px_10px_-5px_rgba(0,0,0,0.4)]">
-                  <div className="optionItem w-52 flex justify-between m-[10px]">
-                    <span className="optionText">Adult</span>
-                    <div className="optionCounter flex items-center gap-3">
-                      <button
-                        disabled={options.adult <= 1}
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("adult", "d")}
-                      >
-                        -
-                      </button>
-                      <span className="optionCounterNumber">
-                        {options.adult}
-                      </span>
-                      <button
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("adult", "i")}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="optionItem w-52 flex justify-between m-[10px]">
-                    <span className="optionText">Children</span>
-                    <div className="optionCounter flex items-center gap-3">
-                      <button
-                        disabled={options.children <= 0}
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("children", "d")}
-                      >
-                        -
-                      </button>
-                      <span className="optionCounterNumber">
-                        {options.children}
-                      </span>
-                      <button
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("children", "i")}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="optionItem w-52 flex justify-between m-[10px]">
-                    <span className="optionText">Room</span>
-                    <div className="optionCounter flex items-center gap-3">
-                      <button
-                        disabled={options.room <= 1}
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("room", "d")}
-                      >
-                        -
-                      </button>
-                      <span className="optionCounterNumber">
-                        {options.room}
-                      </span>
-                      <button
-                        className="optionCounterButton w-8 h-8 border-2 border-blue-500 text-blue-500 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        onClick={() => handleOption("room", "i")}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+              {openDate && (
+                <div className="absolute top-[50px] left-0 z-20 bg-white shadow-md p-4 border rounded-md">
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={(item) => setDate([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={date}
+                    minDate={new Date()}
+                  />
                 </div>
               )}
             </div>
-            {/* button */}
-            <div className="headerSearchItem flex items-center gap-5">
+
+            {/* People */}
+            <div className="headerSearchItem relative flex items-center gap-3 w-full border-2 border-yellow-500 px-3 py-2 rounded-md bg-gray-100 cursor-pointer">
+              <IoPersonOutline className="text-blue-500 text-xl" />
+              <span
+                onClick={() => setOpenOptions(!openOptions)}
+                className="text-gray-600"
+              >
+                {`${options.adult} Adult · ${options.children} Children · ${options.room} Room`}
+              </span>
+              {openOptions && (
+                <div className="absolute top-[50px] left-0 right-0 z-20 bg-white shadow-md border rounded-md p-4">
+                  {["adult", "children", "room"].map((type) => (
+                    <div
+                      key={type}
+                      className="flex justify-between items-center my-2"
+                    >
+                      <span className="capitalize">{type}</span>
+                      <div className="flex items-center gap-3">
+                        <button
+                          disabled={options[type] <= (type === "adult" ? 1 : 0)}
+                          className="w-8 h-8 border-2 border-blue-500 text-blue-500 rounded-md disabled:bg-gray-300"
+                          onClick={() => handleOption(type, "d")}
+                        >
+                          -
+                        </button>
+                        <span className="w-6 text-center">{options[type]}</span>
+                        <button
+                          className="w-8 h-8 border-2 border-blue-500 text-blue-500 rounded-md"
+                          onClick={() => handleOption(type, "i")}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Buttonss */}
+            <div className="headerSearchItem flex justify-center w-full">
               <button
                 onClick={handleSearch}
-                className="headerBtn p-2 rounded-md bg-yellow-500"
+                className="w-full md:w-auto px-6 py-2 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
               >
                 Search
               </button>

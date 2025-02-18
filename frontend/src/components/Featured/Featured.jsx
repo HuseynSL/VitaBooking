@@ -6,7 +6,7 @@ const Featured = () => {
   const { data, loading, error}=useFetch(`${url}/hotels/countByCity?cities=Baku,Siyezen,Sumqayit`)
   
     return (
-        <div className="featured w-full max-w-6xl flex justify-between gap-5 z-10">
+        <div className="featured w-full mt-12 max-w-6xl grid grid-cols-1 justify-between gap-5 z-10 md:grid-cols-2 lg:grid-cols-3">
          {loading ?  (
         "Loading please wait"
       ) : (

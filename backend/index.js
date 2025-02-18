@@ -8,12 +8,37 @@ import hotelsRoute from "./routers/hotels.js";
 import roomsRoute from "./routers/rooms.js";
 import reservationRoute from "./routers/reservations.js";
 import cookieParser from "cookie-parser";
+import { Server } from "socket.io";
+import http from "http";
 
 const app=express()
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // Frontend URL
+    methods: ["GET", "POST"],
+  },
+});
 app.use(cookieParser())
 app.use(json())
 app.use(cors())
 dotenv.config()
+
+io.on("connection", (socket) => {
+  console.log("Bir kullanıcı bağlandı:", socket.id);
+
+  socket.on("sendMessage", (data) => {
+    console.log(`Mesaj alındı: ${data.user}: ${data.text}`);
+    
+    // Gelen mesajı tüm kullanıcılara gönder
+    io.emit("receiveMessage", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Bir kullanıcı ayrıldı:", socket.id);
+  });
+});
+
 
 const connect = async () => {
     try {
@@ -39,7 +64,7 @@ const connect = async () => {
     });
 });
 
-app.listen(3001,()=>{
-    connect()
-    console.log("app listened 3001 port"); 
-})
+server.listen(3001, () => {
+  connect();
+  console.log("Server is running on port 3001");
+});

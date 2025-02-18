@@ -23,7 +23,7 @@ const ListSlider = () => {
   }
   return (
     <>
-      <div className="listSearch text-white flex-1 bg-blue-600 p-2 border-8 sticky top-[10px] h-max">
+      <div className="listSearch text-white flex-1 bg-blue-600 p-2 border-8 static top-[10px] h-max md:sticky">
         <h1 className="lsTitle text-sm text-white mb-2">Search</h1>
 
         <div className="lsItem flex flex-col gap-2 mb-3">

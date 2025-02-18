@@ -6,7 +6,7 @@ import url from '../../utils/baseUrl';
 const FProperties = () => {
   const { data, loading, error}=useFetch(`${url}/hotels?featured=true&limit=4`)
     return (
-        <div className="fproperties w-full max-w-6xl flex justify-between gap-5">
+        <div className="fproperties w-full max-w-6xl grid grid-cols-1 justify-between gap-5 md:grid-cols-2 lg:grid-cols-4">
            {loading ? (
         "Loading"
       ) : (

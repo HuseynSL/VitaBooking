@@ -14,7 +14,8 @@ const PropertyList = () => {
   ];
   
     return (
-        <div className="pList grid grid-cols-5 w-full max-w-6xl flex justify-between gap-5">
+      <>
+        <div className="pList grid grid-cols-2 w-full max-w-6xl justify-between gap-5 md:grid-cols-3 lg:grid-cols-5">
             {loading ?  (
         "Loading please wait"
       ) : (
@@ -83,6 +84,7 @@ const PropertyList = () => {
           </>)}
 
         </div>
+        </>
       );
 }
 

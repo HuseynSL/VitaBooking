@@ -15,16 +15,16 @@
   margin: -20px 0 50px;
 }
 
-h1 {
+.h1 {
   font-weight: bold;
   margin: 0;
 }
 
-h2 {
+.h2 {
   text-align: center;
 }
 
-p {
+.p {
   font-size: 14px;
   font-weight: 100;
   line-height: 20px;
@@ -32,11 +32,11 @@ p {
   margin: 20px 0 30px;
 }
 
-span {
+.span {
   font-size: 12px;
 }
 
-a {
+.a {
   color: #333;
   font-size: 14px;
   text-decoration: none;

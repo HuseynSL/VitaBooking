@@ -70,7 +70,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="copyright flex flex-col items-center gap-3 mt-12">
+        <div className="copyright flex flex-col items-center gap-1 mt-12">
           <div className="ctext">
             <hr />  
             <h2 className='text-sm font-light text-gray-500'>Copyright @ Booking.com</h2>

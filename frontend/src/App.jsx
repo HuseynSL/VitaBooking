@@ -7,6 +7,7 @@ import List from "./pages/HotelsList/List";
 import Login from "./pages/Login/Login";
 import UserRoot from "./pages/UserRoot";
 import Profile from "./pages/UserProfile/Profile";
+import ChatPage from "./pages/ChatPage/ChatPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="hotels" element={<List />} />
             <Route path="hotels/:id" element={<Hotel />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="livechat" element={<ChatPage/>} />
           </Route>
         </Routes>
       </BrowserRouter>
