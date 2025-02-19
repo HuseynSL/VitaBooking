@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext.jsx";
 import styles from "./style.module.css";
 import axios from "axios";
-import url from "../../utils/baseUrl.js";
+import url from "../../../utils/baseUrl.js";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);

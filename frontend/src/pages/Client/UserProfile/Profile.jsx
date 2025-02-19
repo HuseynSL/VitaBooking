@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import MyReservations from "../../components/MyReserv/MyReservations"
+import { AuthContext } from "../../../context/AuthContext";
+import MyReservations from "../../../components/MyReserv/MyReservations"
 
 const Profile = () => {
   const { user } = useContext(AuthContext);

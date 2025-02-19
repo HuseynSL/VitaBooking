@@ -15,14 +15,18 @@ const app=express()
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Frontend URL
+    origin: "http://localhost:5173", 
     methods: ["GET", "POST"],
   },
 });
 app.use(cookieParser())
 app.use(json())
-app.use(cors())
 dotenv.config()
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true, 
+}));
+
 
 io.on("connection", (socket) => {
   console.log("Bir kullanıcı bağlandı:", socket.id);
@@ -30,7 +34,6 @@ io.on("connection", (socket) => {
   socket.on("sendMessage", (data) => {
     console.log(`Mesaj alındı: ${data.user}: ${data.text}`);
     
-    // Gelen mesajı tüm kullanıcılara gönder
     io.emit("receiveMessage", data);
   });
 

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 import style from "./style.module.css";
 import { useLocation } from "react-router-dom";
-import MailInput from "../../components/MailInput/MailInput";
+import MailInput from "../../../components/MailInput/MailInput";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import url from "../../utils/baseUrl";
-import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext";
-import Reservation from "../../components/Reservation/Reservation";
+import useFetch from "../../../hooks/useFetch";
+import url from "../../../utils/baseUrl";
+import { SearchContext } from "../../../context/SearchContext";
+import { AuthContext } from "../../../context/AuthContext";
+import Reservation from "../../../components/Reservation/Reservation";
 
 const Hotel = () => {
   const navigate = useNavigate();

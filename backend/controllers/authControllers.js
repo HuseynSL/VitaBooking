@@ -1,10 +1,10 @@
 import User from "../models/user.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import {createError} from "../utils/error.js"
+import { createError } from "../utils/error.js"
 
 export const register = async (req, res, next) => {
-    try { 
+    try {
 
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
@@ -27,10 +27,9 @@ export const register = async (req, res, next) => {
     }
 };
 
-
 export const login = async (req, res, next) => {
-    try { 
-        console.log("Login Request Body:", req.body); 
+    try {
+        console.log("Login Request Body:", req.body);
 
         const user = await User.findOne({ username: req.body.username });
         if (!user) {
@@ -42,14 +41,19 @@ export const login = async (req, res, next) => {
         if (!isPasswordCorrect) {
             console.log("Wrong password!");
             return res.status(400).json({ error: "Wrong password or username!" });
-            
         }
-        const {password,isAdmin,...otherDetails}=user._doc
-        const token = jwt.sign({id:user._id, isAdmin:user.isAdmin},process.env.JWT)
+
+        const { password, ...otherDetails } = user._doc;
+        const token = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin },
+            process.env.JWT
+        );
+
         console.log("Login successful!");
-        return res.cookie("access_token",token,{
-            httpOnly:true,
-        }).status(200).json({...otherDetails});
+
+        return res.cookie("access_token", token, {
+            httpOnly: true,
+        }).status(200).json({ ...otherDetails, isAdmin: user.isAdmin,token });
     } catch (err) {
         console.error("Login Error:", err);
         return res.status(500).json({ error: "Internal Server Error", details: err.message });

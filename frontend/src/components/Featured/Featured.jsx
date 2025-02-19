@@ -10,7 +10,7 @@ const Featured = () => {
          {loading ?  (
         "Loading please wait"
       ) : (
-         <><div className="featuredItem relative text-white border-8 overflow-hidden	h-60 flex-1">
+         <><div className="featuredItem relative text-white border-4 overflow-hidden h-60 flex-1">
             <img
               src="https://ychef.files.bbci.co.uk/960x540/p09vhml6.jpeg"
               alt=""

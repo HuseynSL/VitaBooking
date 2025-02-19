@@ -1,5 +1,5 @@
 import React from 'react'
-import ListSlider from '../../components/listSLider/ListSlider'
+import ListSlider from '../../../components/listSLider/ListSlider'
 
 const List = () => {
   return (

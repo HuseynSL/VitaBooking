@@ -7,3 +7,9 @@
     margin: 0 auto;   
     position: relative;
 }
+
+@media (max-width: 768px) { 
+    .container{
+        min-height: 450px;
+    }
+ }

@@ -17,13 +17,21 @@ const AuthReducer = (state, action) => {
         loading: true,
         error: null,
       };
-    case "LOGIN_SUCCESS":
+      case "LOGIN_SUCCESS":
+        localStorage.setItem("user", JSON.stringify(action.payload)); 
+        return {
+          user: action.payload, 
+          loading: false,
+          error: null,
+        };
+      
     case "REGISTER_SUCCESS":
       return {
-        user: action.payload,
+        user: { ...action.payload, isAdmin: action.payload.isAdmin || false },
         loading: false,
         error: null,
       };
+
     case "LOGIN_FAILURE":
     case "REGISTER_FAILURE":
       return {
@@ -42,7 +50,6 @@ const AuthReducer = (state, action) => {
   }
 };
 
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
@@ -50,20 +57,16 @@ export const AuthContextProvider = ({ children }) => {
     if (state.user) {
       localStorage.setItem("user", JSON.stringify(state.user));
     } else {
-      localStorage.removeItem("user"); 
+      localStorage.removeItem("user");
     }
   }, [state.user]);
-  
-  const value={
+
+  const value = {
     user: state.user,
     loading: state.loading,
     error: state.error,
-    dispatch
-}
+    dispatch,
+  };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

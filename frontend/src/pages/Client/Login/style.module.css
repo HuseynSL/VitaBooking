@@ -45,8 +45,9 @@
 
 .button {
   border-radius: 20px;
-  border: 1px solid #FF4B2B;
-  background-color: #FF4B2B;
+  border: 1px solid #1e90ff;
+  background: -webkit-linear-gradient(to right, #1e90ff, #00bfff);
+  background: linear-gradient(to right, #1e90ff, #00bfff);
   color: #FFFFFF;
   font-size: 12px;
   font-weight: bold;
@@ -54,6 +55,11 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+}
+
+.button:hover {
+  background: -webkit-linear-gradient(to right, #00bfff, #1e90  ff);
+  background: linear-gradient(to right, #00bfff, #1e90ff);
 }
 
 button:active {
@@ -157,9 +163,9 @@ form {
 }
 
 .overlay {
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  background: #1c0f6e;
+  background: -webkit-linear-gradient(to right, #1c0f6e, #1e90ff);
+  background: linear-gradient(to right, #1c0f6e, #1e90ff);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

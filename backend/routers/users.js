@@ -23,7 +23,7 @@ router.delete("/:id",verifyUser,deleteuser)
 // GETByID
 router.get("/:id",verifyUser,getByIduser)
 // GETALL
-router.get("/",verifyAdmin, getuser)  
+router.get("/", verifyAdmin,getuser)  
 
 
 

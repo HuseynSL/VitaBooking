@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import url from "../utils/baseUrl";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
