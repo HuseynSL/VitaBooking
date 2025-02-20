@@ -1,21 +1,23 @@
-import jwt from "jsonwebtoken";
 import { createError } from "./error.js";
 
 export const verifyToken = (req, res, next) => {
-    const token = req.cookies.access_token;
+    const token = req.headers.authorization?.split(" ")[1]; // "Bearer token" formatını ayırıyoruz
     if (!token) {
         return next(createError(401, "You are not authenticated"));
     }
-    jwt.verify(token, process.env.JWT, (err, user) => {
-        if (err) {
-            return next(createError(403, "Token isn't valid"));
-        }
-        console.log("Decoded User:", user);
-        req.user = user;
-        next();
-    });
-};
 
+    if (token === "admin-secret-token-123") {
+        req.user = { id: "admin", isAdmin: true };
+        return next();
+    }
+
+    if (token === "user-secret-token-456") {
+        req.user = { id: "user", isAdmin: false };
+        return next();
+    }
+
+    return next(createError(403, "Invalid token"));
+};
 
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res, (err) => {

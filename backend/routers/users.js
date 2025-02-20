@@ -1,6 +1,7 @@
 import express from "express"
 import { deleteuser,getByIduser,getuser,updateuser } from "../controllers/userControllers.js"
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js"
+import user from "../models/user.js"
 const router = express.Router()
 
 
@@ -23,8 +24,15 @@ router.delete("/:id",verifyUser,deleteuser)
 // GETByID
 router.get("/:id",verifyUser,getByIduser)
 // GETALL
-router.get("/", verifyAdmin,getuser)  
-
+router.get("/", verifyAdmin, async (req, res, next) => {
+    try {
+        const users = await user.find();
+        res.status(200).json(users);
+    } catch (err) {
+        next(err);
+    }
+});
+  
 
 
 export default router

@@ -3,7 +3,7 @@ import url from "../../utils/baseUrl.js"
 import useFetch from "../../hooks/useFetch.js"
 const Featured = () => {
   // deyisiklik edilecek
-  const { data, loading, error}=useFetch(`${url}/hotels/countByCity?cities=Baku,Siyezen,Sumqayit`)
+  const { data, loading, error}=useFetch(`/hotels/countByCity?cities=Baku,Siyezen,Sumqayit`)
   
     return (
         <div className="featured w-full mt-12 max-w-6xl grid grid-cols-1 justify-between gap-5 z-10 md:grid-cols-2 lg:grid-cols-3">

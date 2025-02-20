@@ -1,18 +1,13 @@
-import React, { useState } from "react";
-import url from "../../utils/baseUrl";
-import useFetch from "../../hooks/useFetch";
+import React from "react";
+import useFetch from "../../../hooks/useFetch";
+import url from "../../../utils/baseUrl";
 
-const AdminTable = () => {
-  const { data, loading, error } = useFetch(`${url}/users`);
-  fetch("http://localhost:3001/api/users", {
-    method: "GET",
+const HotelsTable = () => {
+  const { data, loading, error } = useFetch(`${url}/hotels`, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer admin-secret-token-123`,
     },
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+  });
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
@@ -25,8 +20,7 @@ const AdminTable = () => {
                 <th className="py-3 px-4 text-left">ID</th>
                 <th className="py-3 px-4 text-left">Name</th>
                 <th className="py-3 px-4 text-left">Email</th>
-                {/* <th className="py-3 px-4 text-left">Rol</th> */}
-                {/* <th className="py-3 px-4 text-left">Durum</th> */}
+                <th className="py-3 px-4 text-left">Role</th>
               </tr>
             </thead>
 
@@ -37,9 +31,9 @@ const AdminTable = () => {
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
                   <td className="py-3 px-4">{item._id}</td>
-                  <td className="py-3 px-4">{item.username}</td>
-                  <td className="py-3 px-4">{item.email}</td>
-                  <td className="py-3 px-4">{item.isAdmin}</td>
+                  <td className="py-3 px-4">{item.name}</td>
+                  <td className="py-3 px-4">{item.desc}</td>
+                  <td className="py-3 px-4">{item.city}</td>
                 </tr>
               ))}
             </tbody>
@@ -50,4 +44,4 @@ const AdminTable = () => {
   );
 };
 
-export default AdminTable;
+export default HotelsTable;

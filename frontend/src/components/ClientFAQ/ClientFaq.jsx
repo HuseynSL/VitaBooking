@@ -8,14 +8,17 @@ const LiveChat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on("receiveMessage", (data) => {
+    const handleMessage = (data) => {
       setMessages((prev) => [...prev, data]);
-    });
-
+    };
+  
+    socket.on("receiveMessage", handleMessage);
+  
     return () => {
-      socket.off("receiveMessage");
+      socket.off("receiveMessage", handleMessage);
     };
   }, []);
+  
 
   const sendMessage = () => {
     if (message.trim()) {

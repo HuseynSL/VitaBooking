@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import url from "../utils/baseUrl";
 
-const useFetch = (url) => {
+const useFetch = (endpoint, options = {}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -11,7 +11,13 @@ const useFetch = (url) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(`${endpoint}`, {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer admin-secret-token-123`, // Statik admin token ekliyoruz
+            ...options.headers, // Eğer ekstra header varsa ekle
+          },
+        });
         setData(res.data);
       } catch (err) {
         setError(err);
@@ -19,12 +25,18 @@ const useFetch = (url) => {
       setLoading(false);
     };
     fetchData();
-  }, [url]);
+  }, [endpoint]);
 
   const reFetch = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(url);
+      const res = await axios.get(`${url}${endpoint}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer admin-secret-token-123`,
+          ...options.headers,
+        },
+      });
       setData(res.data);
     } catch (err) {
       setError(err);
