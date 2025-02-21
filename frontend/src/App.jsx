@@ -12,8 +12,10 @@ import NotFound from "./pages/Client/NotFound/NotFound";
 import AdminSupport from "./pages/Admin/SupportPage/AdminSupport";
 import ChatPage from "./pages/Client/ChatPage/ChatPage";
 import HotelsTable from "./pages/Admin/HotelsTable/HotelsTable";
-import UsersTable from "./pages/Admin/UsersTable/Userstable";
-// import RezervationsTable from "./pages/Admin/RezervationsTable/RezervationsTable";
+import UsersTable from "./pages/Admin/UsersTable/UsersTable";
+import RezervationsTable from "./pages/Admin/RezervationsTable/RezervationsTable";
+import AddHotels from "./pages/Admin/AddHotels/AddHotels";
+import AddRooms from "./pages/Admin/AddRooms/AddRooms";
 
 
 function App() {
@@ -37,9 +39,12 @@ function App() {
             <Route index element={<AdminRoot />} />
             <Route path="users" element={<UsersTable/>} />
             <Route path="hotels" element={<HotelsTable/>} /> 
-            {/* <Route path="reservations" element={<RezervationsTable/>} />  */}
+            <Route path="reservations" element={<RezervationsTable/>} /> 
+            <Route path="addhotels" element={<AddHotels/>} /> 
+            <Route path="addrooms" element={<AddRooms/>} /> 
             {/* <Route path="support" element={<AdminSupport/>} /> */}
           </Route>
+          
         </Routes>
       </BrowserRouter>
     </>

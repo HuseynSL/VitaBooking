@@ -3,11 +3,12 @@ import {
     createReservation,
     getUserReservations,
     cancelReservation,
+    getAllReservations,
 } from "../controllers/reservationControllers.js";
 
 const router = express.Router();
 
-
+router.get("/",getAllReservations);
 router.get("/user/:userId", getUserReservations);
 
 

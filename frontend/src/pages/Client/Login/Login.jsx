@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
 
     if (isSignUp) {
-      // Kayıt olma işlemi
+      
       dispatch({ type: "REGISTER_START" });
       try {
         const res = await axios.post(`${url}/auth/register`, credentials);
@@ -38,7 +38,6 @@ const Login = () => {
         });
       }
     } else {
-      // Giriş yapma işlemi
       dispatch({ type: "LOGIN_START" });
       try {
         const res = await axios.post(`${url}/auth/login`, credentials);

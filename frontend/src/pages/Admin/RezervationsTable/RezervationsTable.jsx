@@ -6,7 +6,7 @@ import axios from "axios";
 
 const HotelsTable = () => {
     const [list, setList] = useState([]);
-  const { data, loading, error } = useFetch(`${url}/hotels`, {
+  const { data, loading, error } = useFetch(`${url}/reservations`, {
     headers: {
       Authorization: `Bearer admin-secret-token-123`,
     },
@@ -21,7 +21,7 @@ const HotelsTable = () => {
 
     const handleDelete = async (id) => {
       try {
-        await axios.delete(`${url}/hotels/${id}`, {
+        await axios.delete(`${url}/reservations/${id}`, {
           headers: {
             Authorization: `Bearer admin-secret-token-123`,
           },

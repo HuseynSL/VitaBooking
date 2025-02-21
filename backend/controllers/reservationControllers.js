@@ -126,3 +126,22 @@ export const cancelReservation = async (req, res) => {
     res.status(500).json({ message: "Something went wrong", error: err.message });
   }
 };
+
+
+export const getAllReservations = async (req, res) => {
+  try {
+    const reservations = await Reservation.find()
+      .populate("userId", "username email") // Kullanıcı bilgilerini ekleyelim
+      .populate("hotelId", "name location") // Otel bilgilerini ekleyelim
+      .sort({ startDate: -1 }); // En yeni rezervasyonları önce getir
+
+    if (!reservations.length) {
+      return res.status(404).json({ message: "No reservations found" });
+    }
+
+    res.status(200).json(reservations);
+  } catch (error) {
+    console.error("Error fetching all reservations:", error);
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+};

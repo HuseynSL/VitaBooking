@@ -26,7 +26,7 @@ export const createRoom = async (req, res, next) => {
   };
 
 
-//GET ALL HOTELS
+//GET ALL ROOMS
 export const getRoom = async (req, res, next) => {
     try {
         const rooms = await Room.find()
