@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import style from "./style.module.css";
 import { useLocation } from "react-router-dom";
 import MailInput from "../../../components/MailInput/MailInput";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -73,12 +72,10 @@ const Hotel = () => {
           {open && (
             <div className="slider sticky top-0 right-0 w-screen h-screen bg-black bg-opacity-60 z-50 flex items-center">
               <IoIosCloseCircleOutline
-                // icon={faCircleXmark}
                 className="close absolute top-[20px] right-[20px] cursor-pointer text-3xl"
                 onClick={() => setOpen(false)}
               />
               <FaArrowLeftLong
-                // icon={faCircleArrowLeft}
                 className="arrow m-5 text-3xl text-black cursor-pointer"
                 onClick={() => handleMove("l")}
               />
@@ -90,7 +87,6 @@ const Hotel = () => {
                 />
               </div>
               <FaArrowRightLong
-                // icon={faCircleArrowRight}
                 className="arrow m-5 text-3xl text-black cursor-pointer"
                 onClick={() => handleMove("r")}
               />
@@ -98,7 +94,7 @@ const Hotel = () => {
           )}
 
           <div className="hotelWrapper w-full max-w-5xl flex flex-col gap-3 relative">
-            <button className="bookNow absolute top-[10px] right-0 py-3 px-5 bg-blue-500 text-white font-bold rounded-sm cursor-pointer">
+            <button className="bookNow hidden absolute top-[10px] right-0 py-3 px-8 bg-blue-500 text-white font-bold rounded-sm cursor-pointer md:block">
               Reserve or Book Now!
             </button>
             <h1 className="hotelTitle text-xl">{data.name}</h1>
@@ -114,7 +110,7 @@ const Hotel = () => {
               free airport taxi
             </span>
 
-            <div className="hotelImages grid grid-cols-2 sm:grid-cols-2  md:grid-cols-3 gap-2 justify-between">
+            <div className="hotelImages grid px-4 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-2 justify-between">
               {data.photos?.map((photo, i) => (
                 <div className="hotelImgWrapper " key={i}>
                   <img
@@ -127,7 +123,7 @@ const Hotel = () => {
               ))}
             </div>
 
-            <div className="hotelDetails grid grid-cols-3 justify-between gap-5 mt-5">
+            <div className="hotelDetails px-4 grid grid-cols-1 justify-between gap-5 mt-5 md:grid-cols-2 lg:grid-cols-3">
               <div className="hotelDetailsTexts col-span-2">
                 <h1 className="hotelTitle">{data.title}</h1>
                 <p className="hotelDesc font-sm mt-5">{data.desc}</p>

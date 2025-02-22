@@ -21,6 +21,7 @@ const Home = () => {
         <p>Error: {error}</p>
       ) : (
         <>
+          {/* <h1 className='homeTitle max-w-5xl text-2xl font-bold self-baseline pl-44'>Explore Azerbaijan</h1> */}
           <Featured />
           <h1 className="homeTitle max-w-5xl text-2xl font-bold self-baseline pl-44">
             Browse by property type

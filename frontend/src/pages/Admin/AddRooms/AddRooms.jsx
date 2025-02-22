@@ -23,11 +23,14 @@ const RoomSchema = Yup.object().shape({
 
 const AddRooms = () => {
   return (
-    <div className="w-full flex">
+    <div className="flex min-h-screen bg-gray-100">
       <AdminSidebar />
 
-      <div className="w-full p-8 bg-white shadow-md rounded-lg">
-        <h1 className="text-3xl font-bold text-center mb-6">Add Room</h1>
+      <div className="w-4/5 p-8 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-semibold text-center text-gray-800">
+          Add New Room
+        </h1>
+
         <Formik
           initialValues={{
             hotelId: "",
@@ -53,125 +56,82 @@ const AddRooms = () => {
           }}
         >
           {({ values, setFieldValue }) => (
-            <Form>
-              <div className="mb-4">
-                <label
-                  htmlFor="hotelId"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Hotel ID
-                </label>
+            <Form className="grid grid-cols-2 gap-8">
+              <div>
+                <label className="block text-gray-700 font-medium">Hotel ID</label>
                 <Field
-                  id="hotelId"
                   name="hotelId"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
                   placeholder="Enter hotel ID"
                 />
               </div>
 
-              {/* Room */}
-              <div className="mb-4">
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Room Title
-                </label>
+              <div>
+                <label className="block text-gray-700 font-medium">Room Title</label>
                 <Field
-                  id="title"
                   name="title"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
                   placeholder="Enter room title"
                 />
               </div>
 
-              {/* Price */}
-              <div className="mb-4">
-                <label
-                  htmlFor="price"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Price
-                </label>
+              <div>
+                <label className="block text-gray-700 font-medium">Price</label>
                 <Field
-                  id="price"
                   name="price"
                   type="number"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
                   placeholder="Enter room price"
                 />
               </div>
 
-              {/* Max People */}
-              <div className="mb-4">
-                <label
-                  htmlFor="maxPeople"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Max People
-                </label>
+              <div>
+                <label className="block text-gray-700 font-medium">Max People</label>
                 <Field
-                  id="maxPeople"
                   name="maxPeople"
                   type="number"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
                   placeholder="Enter max people"
                 />
               </div>
 
-              {/* Description */}
-              <div className="mb-4">
-                <label
-                  htmlFor="desc"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Room Description
-                </label>
+              <div className="col-span-2">
+                <label className="block text-gray-700 font-medium">Room Description</label>
                 <Field
-                  id="desc"
                   name="desc"
                   as="textarea"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
                   placeholder="Enter room description"
+                  rows="3"
                 />
               </div>
 
-              {/* Room Numbers */}
-              <div className="mb-4">
-                <label
-                  htmlFor="roomNumbers"
-                  className="block text-sm font-medium text-gray-700"
-                >
+              <div className="col-span-2">
+                <label className="block text-gray-700 font-medium">
                   Room Numbers (comma separated)
                 </label>
                 <input
-                  id="roomNumbers"
                   name="roomNumbers"
                   type="text"
-                  className="mt-1 p-3 w-full border border-gray-300 rounded-lg"
-                  placeholder="Enter room numbers, e.g. 101, 102"
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
+                  placeholder="E.g. 101, 102, 103"
                   onChange={(e) => {
-                   
                     const numbers = e.target.value
                       .split(",")
                       .map((num) => ({
-                        number: parseInt(num.trim()), 
-                        unavailableDates: [], 
+                        number: parseInt(num.trim()),
+                        unavailableDates: [],
                       }));
 
                     setFieldValue("roomNumbers", numbers);
                   }}
                 />
-                <pre className="mt-2 text-sm text-gray-600">
-                  {JSON.stringify(values.roomNumbers, null, 2)}
-                </pre>
               </div>
 
-              {/* Submit Button */}
-              <div className="mt-4 text-center">
+              <div className="col-span-2 text-center">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-md hover:scale-105 transition-transform duration-300"
+                  className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 px-8 rounded-lg text-lg font-semibold hover:scale-105 transition-transform duration-300"
                 >
                   Add Room
                 </button>

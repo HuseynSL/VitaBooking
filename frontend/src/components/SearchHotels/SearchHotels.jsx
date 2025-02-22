@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 const SearchHotels = ({item}) => {
 
   const getRatingLabel = (rating) => {
-    if (rating < 8) return "Good";
-    if (rating >= 8 && rating < 8.5) return "Very Good";
-    if (rating >= 8.5 && rating < 9) return "Fabulous";
-    if (rating >= 9 && rating < 9.5) return "Superb";
-    if (rating >= 9.5 && rating <= 10) return "Exceptional";
+    if (rating < 3) return "Good";
+    if (rating >= 3 && rating < 3.5) return "Very Good";
+    if (rating >= 3.5 && rating < 4) return "Fabulous";
+    if (rating >= 4 && rating < 4.5) return "Superb";
+    if (rating >= 4.5 && rating <= 5) return "Exceptional";
     return "";
   };
   return (
@@ -25,7 +25,7 @@ const SearchHotels = ({item}) => {
 
       <div className="shDesc flex flex-col gap-3 flex-2">
         <h1 className="shTitle font-sm text-blue-400">{item.name}</h1>
-        <span className="shDistance text-xs">{item.distance}m from center</span>
+        <span className="shDistance text-xs">{item.distance} from center</span>
         <span className="shTaxiOp text-xs bg-green-400 text-white w-max p-1 border-4">Free airport taxi</span>
         <span className="shSubtitle text-xs font-bold">
           Studio Apartment with Air conditioning
@@ -43,7 +43,7 @@ const SearchHotels = ({item}) => {
         {item.rating && 
           <div className="shRating flex justify-between">
           <span className='font-md'>{getRatingLabel(item.rating)}</span>
-          <button className='bg-blue-500 text-white p-1 font-bold '>{item.rating}</button>
+          <button className='bg-blue-500 text-white py-2 px-3 font-bold '>{item.rating}</button>
         </div>
         }
 

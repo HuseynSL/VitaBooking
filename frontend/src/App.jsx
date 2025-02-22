@@ -16,6 +16,7 @@ import UsersTable from "./pages/Admin/UsersTable/UsersTable";
 import RezervationsTable from "./pages/Admin/RezervationsTable/RezervationsTable";
 import AddHotels from "./pages/Admin/AddHotels/AddHotels";
 import AddRooms from "./pages/Admin/AddRooms/AddRooms";
+// import PaymentPage from "./pages/Client/PaymentPage/PaymentPage";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="hotels" element={<List/>} />
             <Route path="hotels/:id" element={<Hotel/>} />
             <Route path="profile" element={<Profile/>} />
+            {/* <Route path="payment" element={<PaymentPage/>} /> */}
             <Route path="*" element={<NotFound/>} />
             {/* <Route path="livechat" element={<ChatPage/>} />  */}
           </Route>

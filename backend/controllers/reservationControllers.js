@@ -61,7 +61,7 @@ export const getUserReservations = async (req, res) => {
 
   try {
 
-    const reservations = await Reservation.find({ userId });
+    const reservations = await Reservation.find({ userId }).populate("hotelId");
 
     if (!reservations.length) {
       return res.status(404).json({ message: "No reservations found" });

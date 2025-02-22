@@ -38,7 +38,7 @@ const ListSlider = () => {
         <div className="lsItem flex flex-col gap-2 mb-3">
           <label className="text-xs">Check-in Date</label>
           <span
-            className="h-8 p-1 bg-white flex items-center text-black cursor-pointer"
+            className="h-10 p-1 bg-white text-sm flex items-center text-black cursor-pointer"
             onClick={() => setOpenDate(!openDate)}
           >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
             date[0].endDate,

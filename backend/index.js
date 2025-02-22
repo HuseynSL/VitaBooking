@@ -10,9 +10,28 @@ import reservationRoute from "./routers/reservations.js";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import http from "http";
+import Stripe from "stripe";
 
+dotenv.config()
 const app=express()
 const server = http.createServer(app);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+app.post("/create-payment-intent", async (req, res) => {
+  const { amount, currency } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount * 100, // Stripe amount is in cents
+      currency: currency,
+    });
+
+    res.status(200).json({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173", 
