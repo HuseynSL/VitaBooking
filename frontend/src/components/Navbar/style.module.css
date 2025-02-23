@@ -6,6 +6,38 @@
     padding: 20px 0px;
     color: white;
 }
+:root {
+    --bg-color-dark: #16161a;
+    --text-color-dark: white;
+    --secondary-color-dark: #9999a8;
+  
+    --bg-color-light: #ffffff;
+    --text-color-light: #000000;
+    --secondary-color-light: #666666;
+  }
+  
+  .dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+  }
+  
+  .light-mode {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+  }
+  
+  .heroParag h1 {
+    font-size: 60px;
+  }
+  
+  .heroParag p {
+    font-size: 30px;
+    color: var(--secondary-color-dark);
+  }
+  
+  .light-mode .heroParag p {
+    color: var(--secondary-color-light);
+  }
 @media (max-width: 600px) { 
     .container{
         display: flex;

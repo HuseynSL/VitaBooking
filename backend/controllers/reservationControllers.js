@@ -131,9 +131,9 @@ export const cancelReservation = async (req, res) => {
 export const getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find()
-      .populate("userId", "username email") // Kullanıcı bilgilerini ekleyelim
-      .populate("hotelId", "name location") // Otel bilgilerini ekleyelim
-      .sort({ startDate: -1 }); // En yeni rezervasyonları önce getir
+      .populate("userId", "username email") 
+      .populate("hotelId", "name location") 
+      .sort({ startDate: -1 }); 
 
     if (!reservations.length) {
       return res.status(404).json({ message: "No reservations found" });

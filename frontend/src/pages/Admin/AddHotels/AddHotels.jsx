@@ -63,7 +63,7 @@ const AddHotels = () => {
             <Form className="space-y-6 h-max py-10">
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Hotel Name */}
+
                 <div>
                   <label
                     htmlFor="name"
@@ -82,7 +82,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Hotel Type */}
                 <div>
                   <label
                     htmlFor="type"
@@ -101,7 +100,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* City */}
                 <div>
                   <label
                     htmlFor="city"
@@ -120,7 +118,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Address */}
                 <div>
                   <label
                     htmlFor="address"
@@ -139,7 +136,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Distance */}
                 <div>
                   <label
                     htmlFor="distance"
@@ -160,7 +156,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Title */}
                 <div>
                   <label
                     htmlFor="title"
@@ -179,7 +174,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Rating */}
                 <div>
                   <label
                     htmlFor="rating"
@@ -200,7 +194,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Photos */}
                 <div>
                   <label
                     htmlFor="photos"
@@ -220,7 +213,6 @@ const AddHotels = () => {
                   />
                 </div>
 
-                {/* Description */}
                 <div>
                   <label
                     htmlFor="desc"
@@ -240,7 +232,6 @@ const AddHotels = () => {
                   )}
                 </div>
 
-                {/* Rooms */}
                 <div>
                   <label
                     htmlFor="rooms"
@@ -260,7 +251,6 @@ const AddHotels = () => {
                   />
                 </div>
 
-                {/* Cheapest Price */}
                 <div>
                   <label
                     htmlFor="cheapestPrice"
@@ -283,7 +273,6 @@ const AddHotels = () => {
                 </div>
               </div>
 
-              {/* Featured */}
               <div className="mb-4">
                 <label
                   htmlFor="featured"
@@ -299,7 +288,6 @@ const AddHotels = () => {
                 />
               </div>
 
-              {/* Submit Button */}
               <div className="mt-4 text-center">
                 <button
                   type="submit"
@@ -318,15 +306,3 @@ const AddHotels = () => {
 
 export default AddHotels;
 
-// onSubmit={async (values) => {
-//   try {
-//     await axios.post(`${url}/hotels`, values, {
-//       headers: {
-//         Authorization: `Bearer admin-secret-token-123`,
-//       },
-//     });
-//     navigate("/admin/hotels");
-//   } catch (error) {
-//     console.error("Error adding hotel:", error);
-//   }
-// }}

@@ -16,6 +16,7 @@ import UsersTable from "./pages/Admin/UsersTable/UsersTable";
 import RezervationsTable from "./pages/Admin/RezervationsTable/RezervationsTable";
 import AddHotels from "./pages/Admin/AddHotels/AddHotels";
 import AddRooms from "./pages/Admin/AddRooms/AddRooms";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 // import PaymentPage from "./pages/Client/PaymentPage/PaymentPage";
 
 
@@ -34,17 +35,18 @@ function App() {
             <Route path="profile" element={<Profile/>} />
             {/* <Route path="payment" element={<PaymentPage/>} /> */}
             <Route path="*" element={<NotFound/>} />
-            {/* <Route path="livechat" element={<ChatPage/>} />  */}
+            <Route path="livechat" element={<ChatPage/>} />   
           </Route>
           
           <Route path="/admin" element={<Access/>}>
             <Route index element={<AdminRoot />} />
             <Route path="users" element={<UsersTable/>} />
+            <Route path="dashboard" element={<AdminDashboard/>} />
             <Route path="hotels" element={<HotelsTable/>} /> 
             <Route path="reservations" element={<RezervationsTable/>} /> 
             <Route path="addhotels" element={<AddHotels/>} /> 
             <Route path="addrooms" element={<AddRooms/>} /> 
-            {/* <Route path="support" element={<AdminSupport/>} /> */}
+            <Route path="support" element={<AdminSupport/>} />
           </Route>
           
         </Routes>

@@ -58,7 +58,6 @@ const Login = () => {
         className={`${styles.container} ${isSignUp ? styles.rightPanelActive : ""}`}
         id="container"
       >
-        {/* Register Form */}
         <div className={`${styles.formContainer} ${styles.signUpContainer}`}>
           <form onSubmit={handleSubmit}>
             <h1 className={styles.h1}>Create Account</h1>
@@ -82,7 +81,6 @@ const Login = () => {
           </form>
         </div>
 
-        {/* Login Form */}
         <div className={`${styles.formContainer} ${styles.signInContainer}`}>
           <form onSubmit={handleSubmit}>
             <h1 className={styles.h1}>Sign in</h1>
@@ -106,7 +104,6 @@ const Login = () => {
           </form>
         </div>
 
-        {/* Panel Animasyonu */}
         <div className={styles.overlayContainer}>
           <div className={styles.overlay}>
             <div className={`${styles.overlayPanel} ${styles.overlayLeft}`}>

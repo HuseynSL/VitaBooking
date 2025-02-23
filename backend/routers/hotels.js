@@ -1,7 +1,5 @@
 import express from "express"
 const router = express.Router()
-
-import Hotel from "../models/hotel.js"
 import { deleteHotel,
         getByIdHotel,
         getHotel,

@@ -5,7 +5,7 @@ import axios from "axios";
 import AdminSidebar from "../../../components/AdminSidebar/AdminSidebar";
 import url from "../../../utils/baseUrl";
 
-// Validation schema for rooms
+
 const RoomSchema = Yup.object().shape({
   title: Yup.string().required("Room title is required"),
   price: Yup.number().required("Price is required").min(0),

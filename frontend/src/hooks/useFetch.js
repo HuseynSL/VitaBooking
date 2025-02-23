@@ -14,8 +14,8 @@ const useFetch = (endpoint, options = {}) => {
         const res = await axios.get(`${endpoint}`, {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer admin-secret-token-123`, // Statik admin token ekliyoruz
-            ...options.headers, // Eğer ekstra header varsa ekle
+            Authorization: `Bearer admin-secret-token-123`,
+            ...options.headers,
           },
         });
         setData(res.data);

@@ -1,5 +1,5 @@
 import React from 'react'
-import ClientFAQ from "../../../components/ClientFAQ/ClientFaq"
+import ClientFAQ from "../../../components/ClientFAQ/ClientFAQ"
 
 const ChatPage = () => {
   return (

@@ -1,10 +1,7 @@
-import React from 'react'
-import url from "../../utils/baseUrl.js"
-import useFetch from "../../hooks/useFetch.js"
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const SearchHotels = ({item}) => {
-
+const SearchHotels = ({ item }) => {
   const getRatingLabel = (rating) => {
     if (rating < 3) return "Good";
     if (rating >= 3 && rating < 3.5) return "Very Good";
@@ -13,52 +10,49 @@ const SearchHotels = ({item}) => {
     if (rating >= 4.5 && rating <= 5) return "Exceptional";
     return "";
   };
+
   return (
-    <>
-    
-    <div className="searchHotel border-2 p-2 rounded-sm flex justify-between gap-5 mb-5">
+    <div className="border border-gray-200 shadow-md rounded-xl p-4 flex gap-4 bg-white hover:shadow-lg transition-shadow duration-300">
       <img
         src={item.photos[0]}
-        alt=""
-        className="shImg w-48 object-cover"
+        alt="Hotel"
+        className="w-44 object-cover rounded-lg"
       />
 
-      <div className="shDesc flex flex-col gap-3 flex-2">
-        <h1 className="shTitle font-sm text-blue-400">{item.name}</h1>
-        <span className="shDistance text-xs">{item.distance} from center</span>
-        <span className="shTaxiOp text-xs bg-green-400 text-white w-max p-1 border-4">Free airport taxi</span>
-        <span className="shSubtitle text-xs font-bold">
-          Studio Apartment with Air conditioning
-        </span>
-        <span className="shFeatures text-xs">
-         {item.desc}
-        </span>
-        <span className="shCancelOp text-xs text-green-400 font-bold">Free cancellation </span>
-        <span className="shCancelOpSubtitle text-xs text-green-400">
-          You can cancel later, so lock in this great price today!
-        </span>
-      </div>
-      <div className="shDetails flex-1 flex flex-col justify-between">
+      <div className="flex flex-col flex-grow justify-between">
+        <div>
+          <h1 className="text-lg font-semibold text-blue-500">{item.name}</h1>
+          <span className="text-xs text-gray-500">{item.distance} from center</span>
 
-        {item.rating && 
-          <div className="shRating flex justify-between">
-          <span className='font-md'>{getRatingLabel(item.rating)}</span>
-          <button className='bg-blue-500 text-white py-2 px-3 font-bold '>{item.rating}</button>
+          <p className="text-sm text-gray-600 mt-2">
+            {item.desc.length > 100 ? `${item.desc.slice(0, 400)}...` : item.desc}
+          </p>
         </div>
-        }
 
-        <div className="shDetailTexts text-right flex flex-col gap-1">
-          <span className="shPrice text-xl">${item.cheapestPrice}</span>
-          <span className="shTaxOp text-xs text-gray">Includes taxes and fees</span>
-          <Link to={`/hotels/${item._id}`}>
-          <button className="shCheckButton bg-blue-400 text-white font-bold py-2 px-1 cursor-pointer rounded-sm">See availability</button>
-          </Link>
+        <div className="flex items-center justify-between mt-3">
+          {item.rating && (
+            <div className="flex items-center gap-2 bg-blue-100 px-3 py-1 rounded-md">
+              <span className="text-xs font-medium text-gray-700">
+                {getRatingLabel(item.rating)}
+              </span>
+              <span className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-bold">
+                {item.rating}
+              </span>
+            </div>
+          )}
+
+          <div className="text-right">
+            <span className="text-xl font-semibold text-gray-800">${item.cheapestPrice}</span>
+            <Link to={`/hotels/${item._id}`}>
+              <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-1.5 px-4 rounded-md text-sm font-semibold hover:scale-105 transition-transform duration-200 ml-3">
+                See availability
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
-    
-    </>
-  )
-}
+  );
+};
 
-export default SearchHotels
+export default SearchHotels;

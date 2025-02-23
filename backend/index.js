@@ -7,6 +7,8 @@ import usersRoute from "./routers/users.js";
 import hotelsRoute from "./routers/hotels.js";
 import roomsRoute from "./routers/rooms.js";
 import reservationRoute from "./routers/reservations.js";
+import messageRoute from "./routers/message.js"
+import Message from './models/message.js'
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import http from "http";
@@ -18,26 +20,28 @@ const server = http.createServer(app);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 app.post("/create-payment-intent", async (req, res) => {
-  const { amount, currency } = req.body;
-
   try {
+    const { amount, currency } = req.body;
+
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Stripe amount is in cents
-      currency: currency,
+      amount,
+      currency,
     });
 
     res.status(200).json({ clientSecret: paymentIntent.client_secret });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to create payment intent" });
   }
 });
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", 
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
   },
 });
+
 app.use(cookieParser())
 app.use(json())
 dotenv.config()
@@ -49,19 +53,16 @@ app.use(cors({
 
 
 io.on("connection", (socket) => {
-  console.log("Bir kullanıcı bağlandı:", socket.id);
-
+  console.log("A user connected:", socket.id);
   socket.on("sendMessage", (data) => {
-    console.log(`Mesaj alındı: ${data.user}: ${data.text}`);
-    
+    console.log("Message received:", data);
     io.emit("receiveMessage", data);
   });
 
   socket.on("disconnect", () => {
-    console.log("Bir kullanıcı ayrıldı:", socket.id);
+    console.log("A user disconnected:", socket.id);
   });
 });
-
 
 const connect = async () => {
     try {
@@ -78,6 +79,7 @@ const connect = async () => {
   app.use("/api/hotels",hotelsRoute);
   app.use("/api/rooms",roomsRoute);
   app.use("/api/reservations", reservationRoute);
+  app.use("/api", messageRoute)
 
   app.use((err, req, res, next) => {
     console.error(err.stack);

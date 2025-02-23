@@ -1,7 +1,7 @@
 import { createError } from "./error.js";
 
 export const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1]; // "Bearer token" formatını ayırıyoruz
+    const token = req.headers.authorization?.split(" ")[1]; 
     if (!token) {
         return next(createError(401, "You are not authenticated"));
     }

@@ -16,7 +16,7 @@ const FProperties = () => {
         <>
           {data.map((item) => (
             <div
-              className="fpItem bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              className="fpItem bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-200 cursor-pointer"
               key={item._id}
               onClick={() => navigate(`/hotels/${item._id}`)}
             >

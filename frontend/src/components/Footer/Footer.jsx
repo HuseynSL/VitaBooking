@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <>
     
-      <div className="footer w-full bg-gray-100">
+      <div className="footer w-full text-gray-500">
         <div className={style.container}>
 
         <div className="flist pt-8 gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">

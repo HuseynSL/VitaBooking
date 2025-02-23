@@ -25,7 +25,7 @@ const UsersTable = () => {
           Authorization: `Bearer admin-secret-token-123`,
         },
       });
-      setList(list.filter((item) => item._id !== id)); // State'i güncelle
+      setList(list.filter((item) => item._id !== id)); 
     } catch (err) {
       console.error("Error deleting user:", err);
       if (err.response && err.response.status === 401) {

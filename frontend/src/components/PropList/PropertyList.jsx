@@ -13,7 +13,6 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
   ];
 
-  // Veriyi kontrol et
   if (loading) {
     return <div className="text-center text-gray-600 py-8">Loading please wait...</div>;
   }
@@ -22,7 +21,6 @@ const PropertyList = () => {
     return <div className="text-center text-red-600 py-8">Error: {error.message}</div>;
   }
 
-  // data veya images boşsa
   if (!data || !images || data.length === 0 || images.length === 0) {
     return <div className="text-center text-gray-600 py-8">No data available.</div>;
   }

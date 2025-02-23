@@ -43,13 +43,13 @@ const MyReservations = ({ userId }) => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6  min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">My Reservations</h1>
-  
+
       {error && (
         <p className="text-red-500 bg-red-100 p-3 rounded-lg mb-6">{error}</p>
       )}
-  
+
       {loading ? (
         <p className="text-gray-600 italic">Processing...</p>
       ) : reservations.length > 0 ? (
@@ -59,7 +59,6 @@ const MyReservations = ({ userId }) => {
               key={reservation._id}
               className="p-6 bg-white rounded-lg w-96 shadow-md hover:shadow-lg transition-shadow"
             >
-              {/* Swiper Slider */}
               <div className="relative h-64 mb-4 rounded-lg overflow-hidden">
                 <Swiper
                   modules={[Navigation, Pagination]}
@@ -71,7 +70,9 @@ const MyReservations = ({ userId }) => {
                     <SwiperSlide key={index}>
                       <img
                         src={photo || "https://via.placeholder.com/400"}
-                        alt={`${reservation.hotelId?.name} - Photo ${index + 1}`}
+                        alt={`${reservation.hotelId?.name} - Photo ${
+                          index + 1
+                        }`}
                         className="w-full h-full object-cover"
                       />
                     </SwiperSlide>
@@ -79,8 +80,7 @@ const MyReservations = ({ userId }) => {
                 </Swiper>
                 <div className="absolute inset-0 bg-black bg-opacity-30"></div>
               </div>
-  
-              {/* Otel Bilgileri */}
+
               <div className="space-y-2">
                 <p className="text-xl font-bold text-gray-800">
                   {reservation.hotelId?.name || "Unknown Hotel"}
@@ -112,12 +112,13 @@ const MyReservations = ({ userId }) => {
                   {reservation.hotelId?.address || "No address available"}
                 </p>
               </div>
-  
-              {/* Rezervasyon Detayları */}
+
               <div className="mt-4 border-t pt-4">
                 <p className="text-lg font-semibold text-gray-700">
                   Room:{" "}
-                  <span className="text-gray-900">{reservation.roomNumber}</span>
+                  <span className="text-gray-900">
+                    {reservation.roomNumber}
+                  </span>
                 </p>
                 <p className="text-lg font-semibold text-gray-700">
                   From:{" "}
@@ -132,8 +133,7 @@ const MyReservations = ({ userId }) => {
                   </span>
                 </p>
               </div>
-  
-              {/* İptal Butonu */}
+
               <button
                 onClick={() => handleCancelReservation(reservation._id)}
                 className="mt-4 w-full px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"

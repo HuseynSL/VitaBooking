@@ -59,10 +59,9 @@ const HotelsTable = () => {
           <table className="min-w-full">
             <thead className="bg-[#1c0f6e] text-white">
               <tr>
-                <th className="py-3 px-4 text-left">ID</th>
-                <th className="py-3 px-4 text-left">Name</th>
-                <th className="py-3 px-4 text-left">Description</th>
-                <th className="py-3 px-4 text-left">City</th>
+                <th className="py-3 px-4 text-left"> Reservation ID</th>
+                <th className="py-3 px-4 text-left">Start Date</th>
+                <th className="py-3 px-4 text-left">End Date</th>
                 <th className="py-3 px-4 text-left">Delete Hotel</th>
               </tr>
             </thead>
@@ -74,9 +73,8 @@ const HotelsTable = () => {
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
                   <td className="py-3 px-4">{item._id}</td>
-                  <td className="py-3 px-4">{item.name}</td>
-                  <td className="py-3 px-4">{item.desc}</td>
-                  <td className="py-3 px-4">{item.city}</td>
+                  <td className="py-3 px-4">{item.startDate}</td>
+                  <td className="py-3 px-4">{item.endDate}</td>
                   <td>
                       <button
                         onClick={() => handleDelete(item._id)}

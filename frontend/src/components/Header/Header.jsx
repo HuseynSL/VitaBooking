@@ -99,7 +99,7 @@ const Header = () => {
           </div>
 
           <div className="headerSearch w-full  grid grid-cols-1 py-1 bottom-[-80px] gap-0 md:grid-cols-4 gap-4 py-4 px-4 rounded-xl absolute bg-white border-2 border-blue-500 bottom-[-32px] shadow-lg">
-            {/* Search */}
+            
             <div className="headerSearchItem flex items-center gap-3 w-full border-2 border-yellow-500 px-2 rounded-md bg-gray-100 md:px-3 py-2">
               <IoIosBed className="text-blue-500 text-xl" />
               <input
@@ -111,7 +111,6 @@ const Header = () => {
               />
             </div>
 
-            {/* Datesss */}
             <div className="headerSearchItem relative flex items-center gap-3 w-full border-2 border-yellow-500 px-3 py-2 rounded-md bg-gray-100 cursor-pointer">
               <FaCalendarAlt className="text-blue-500 text-xl" />
               <span
@@ -136,7 +135,6 @@ const Header = () => {
               )}
             </div>
 
-            {/* People */}
             <div className="headerSearchItem relative flex items-center gap-3 w-full border-2 border-yellow-500 px-3 py-2 rounded-md bg-gray-100 cursor-pointer">
               <IoPersonOutline className="text-blue-500 text-xl" />
               <span
@@ -175,7 +173,6 @@ const Header = () => {
               )}
             </div>
 
-            {/* Buttonss */}
             <div className="headerSearchItem flex justify-center w-full">
               <button
                 onClick={handleSearch}

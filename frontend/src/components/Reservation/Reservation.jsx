@@ -93,40 +93,45 @@ const Reservation = ({ setOpen, hotelId }) => {
       console.error("Error making reservation:", err);
     }
   };
+
   return (
-    <div className="reserve w-full h-full fixed top-[0px] left-[0px] flex items-center justify-center">
-      <div className="rContainer bg-white p-5 relative">
+    <div className="reserve w-full h-full fixed top-0 left-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="rContainer bg-white rounded-lg shadow-2xl p-6 w-full max-w-3xl relative">
         <ImCancelCircle
-          className="rClose absolute top-0 right-0 cursor-pointer"
+          className="rClose absolute top-4 right-4 text-2xl text-gray-600 hover:text-red-600 cursor-pointer transition duration-300"
           onClick={() => setOpen(false)}
         />
-        <span>Select your rooms:</span>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">Select Your Rooms</h2>
         {data.map((item) => (
-          <div className="rItem flex items-center gap-12 p-5" key={item._id}>
-            <div className="rItemInfo flex flex-col gap-1">
-              <div className="rTitle font-md">{item.title}</div>
-              <div className="rDesc font-light">{item.desc}</div>
-              <div className="rMax text-sm">
+          <div className="rItem bg-gray-50 rounded-lg p-4 mb-4 shadow-sm" key={item._id}>
+            <div className="rItemInfo flex flex-col gap-2">
+              <div className="rTitle text-lg font-semibold text-gray-800">{item.title}</div>
+              <div className="rDesc text-sm text-gray-600">{item.desc}</div>
+              <div className="rMax text-sm text-gray-700">
                 Max people: <b>{item.maxPeople}</b>
               </div>
-              <div className="rPrice font-md">{item.price}</div>
+              <div className="rPrice text-lg font-bold text-blue-600">${item.price}</div>
             </div>
-            <div className="rSelectRooms flex flex-wrap gap-1 text-xs text-gray">
+            <div className="rSelectRooms flex flex-wrap gap-3 mt-3">
               {item.roomNumbers.map((roomNumber) => (
-                <div className="room flex flex-col" key={roomNumber._id}>
-                  <label>{roomNumber.number}</label>
+                <div className="room flex flex-col items-center" key={roomNumber._id}>
+                  <label className="text-sm text-gray-700">{roomNumber.number}</label>
                   <input
                     type="checkbox"
                     value={roomNumber._id}
                     onChange={handleSelect}
                     disabled={!isAvailable(roomNumber)}
+                    className="w-5 h-5 mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
                 </div>
               ))}
             </div>
           </div>
         ))}
-        <button onClick={handleClick} className="rButton">
+        <button
+          onClick={handleClick}
+          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
           Reserve Now!
         </button>
       </div>
